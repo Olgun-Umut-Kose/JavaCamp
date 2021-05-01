@@ -2,14 +2,14 @@ package com.bgouk;
 
 public class UserManager {
 
-    public void signIn(User user){
-        System.out.println(user.getFirtName() + " isimli kullanıcı giriş yaptı");
+    public void commonOperationOne(User user){
+        System.out.println("Ortak operasyon 1 base den çalştı");
     }
-    public void signOut(User user){
-        System.out.println(user.getFirtName() + " isimli kullanıcı çıkış yaptı");
+    public void commonOperationTwo(User user){
+        System.out.println("Ortak operasyon 2 base den çalştı");
+    }
+    public void commonOperationThree(User user){
+        System.out.println("Ortak operasyon 3 base den çalştı");
     }
 
-    public void signUp(User user){
-        System.out.println(user.getFirtName() + " isimli kullanıcı kayıt oldu");
-    }
 }

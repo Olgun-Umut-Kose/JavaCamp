@@ -20,31 +20,31 @@ public class Main {
 
         StudentManager studentManager = new StudentManager();
 
-        userManager.signIn(user1);
-        userManager.signOut(user2);
-        userManager.signUp(user3);
+        userManager.commonOperationOne(user1);
+        userManager.commonOperationTwo(user2);
+        userManager.commonOperationThree(user3);
         System.out.println("*********************************************************************************");
-        instructorManager.signIn(instructor);
-        instructorManager.signOut(instructor);
-        instructorManager.signUp(instructor);
-        instructorManager.signIn(student);// şimdi ne demek istediğimi anlamışsınızdır
-        instructorManager.signUp(student);
-        instructorManager.signOut(student);
-        instructorManager.signIn(user1);
-        instructorManager.signUp(user2);
-        instructorManager.signOut(user3);
-        instructorManager.addCourse(instructor);
+        instructorManager.commonOperationOne(instructor);
+        instructorManager.commonOperationTwo(instructor);
+        instructorManager.commonOperationThree(instructor);
+        instructorManager.commonOperationOne(student);// şimdi ne demek istediğimi anlamışsınızdır
+        instructorManager.commonOperationTwo(student);
+        instructorManager.commonOperationThree(student);
+        instructorManager.commonOperationOne(user1);
+        instructorManager.commonOperationTwo(user2);
+        instructorManager.commonOperationThree(user3);
+        instructorManager.specificOperation(instructor);
         System.out.println("**********************************************************************");
-        studentManager.signIn(student);
-        studentManager.signOut(student);
-        studentManager.signUp(student);
-        studentManager.signIn(instructor);// şimdi ne demek istediğimi anlamışsınızdır
-        studentManager.signUp(instructor);
-        studentManager.signOut(instructor);
-        studentManager.signIn(user1);
-        studentManager.signUp(user2);
-        studentManager.signOut(user3);
-        studentManager.registerCourse(student);
+        studentManager.commonOperationOne(student);
+        studentManager.commonOperationTwo(student);
+        studentManager.commonOperationThree(student);
+        studentManager.commonOperationOne(instructor);// şimdi ne demek istediğimi anlamışsınızdır
+        studentManager.commonOperationTwo(instructor);
+        studentManager.commonOperationThree(instructor);
+        studentManager.commonOperationOne(user1);
+        studentManager.commonOperationTwo(user2);
+        studentManager.commonOperationThree(user3);
+        studentManager.specificOperation(student);
 
 
     }
