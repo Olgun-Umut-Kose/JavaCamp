@@ -10,16 +10,13 @@ public class CustomerManager {
 
     public void add(Customer customer){
         System.out.println("Müşteri eklendi " + customer.getFirstName());
-        for (Logger logger:loggers) {
-            logger.log(customer.getFirstName() + " isimli müşteri eklendi");
-        }
+        Utils.runLoggers(loggers,customer.getFirstName() + " isimli müşteri eklendi");
 
     }
     public void delete(Customer customer){
         System.out.println("Müşteri silindi " + customer.getFirstName());
-        for (Logger logger:loggers) {
-            logger.log(customer.getFirstName() + " isimli müşteri silindi");
-        }
+        Utils.runLoggers(loggers, customer.getFirstName() + " isimli müşteri silindi");
+
 
     }
 }
