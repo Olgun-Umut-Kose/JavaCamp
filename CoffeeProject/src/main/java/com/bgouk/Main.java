@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) throws Exception {
         NeroCustomerManager neroCustomerManager = new NeroCustomerManager();
-        Customer customer = new Customer(1,"deneme","deneme",LocalDate.of(1999,12,12),"12465454");
+        Customer customer = new Customer(2,"engin","demiroğ",LocalDate.of(1985,1,6),"28861499108");
 
         neroCustomerManager.Save(customer);
 

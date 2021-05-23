@@ -18,7 +18,8 @@ public class MernisAdapter implements ICustomerCheckService {
         URL url = URI.create(endpoint).toURL();
         KPSPublic service = new KPSPublic(url);
         KPSPublicSoap port = service.getPort(KPSPublicSoap.class);
-        return port.tcKimlikNoDogrula(Long.parseLong(customer.getNationalityId()),customer.getFirstName().toUpperCase(Locale.ROOT),customer.getLastName().toUpperCase(Locale.ROOT),customer.getDateOfBirth().getYear());
+        boolean tcKimlikNoDogrula = port.tcKimlikNoDogrula(Long.parseLong(customer.getNationalityId()), customer.getFirstName().toUpperCase(), customer.getLastName().toUpperCase(), customer.getDateOfBirth().getYear());
+        return tcKimlikNoDogrula;
 
 
     }
