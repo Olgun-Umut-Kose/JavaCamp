@@ -1,9 +1,11 @@
 package com.bgouk.hrmsproject.entities.abstracts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 
@@ -14,7 +16,10 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@DiscriminatorColumn(name = "type",discriminatorType = DiscriminatorType.STRING)
 public abstract class User {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +32,14 @@ public abstract class User {
     @Column(name = "password")
     private String password;
 
+    @JsonIgnore
+    @Formula("type")
+    private String type;
 
 
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }
