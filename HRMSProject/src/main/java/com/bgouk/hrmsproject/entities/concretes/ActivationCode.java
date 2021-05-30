@@ -1,4 +1,4 @@
-package com.bgouk.hrmsproject.entities.abstracts;
+package com.bgouk.hrmsproject.entities.concretes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,17 +11,19 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "activation_codes")
-@Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(callSuper = false)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class ActivationCode {
+public class ActivationCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @Column(name = "user_id")
+    private int userId;
 
     @Column(name = "activation_code")
     private String activationCode;
@@ -36,9 +38,11 @@ public abstract class ActivationCode {
     private LocalDate confirmedDate;
 
     @Column(name = "expiration_date")
-    private LocalDateTime expirationDate;
+    private LocalDateTime expirationDate = LocalDateTime.now().plusDays(1);
 
-    public ActivationCode(String activationCode) {
-        this.activationCode = activationCode;
+
+    public ActivationCode(String code, int userId) {
+        this.activationCode = code;
+        this.userId = userId;
     }
 }

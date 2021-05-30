@@ -15,7 +15,7 @@ public class EmployerManager extends UserManager<Employer> implements EmployerSe
     private final EmployerValidatorService employerValidatorService;
 
     @Autowired
-    public EmployerManager(UserDao<Employer> userDao,EmployerValidatorService employerValidatorService) {
+    public EmployerManager(UserDao<Employer> userDao, EmployerValidatorService employerValidatorService) {
         super(userDao);
         this.employerValidatorService = employerValidatorService;
     }

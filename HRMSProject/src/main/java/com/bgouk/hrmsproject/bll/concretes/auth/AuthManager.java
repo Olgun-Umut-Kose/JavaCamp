@@ -1,6 +1,5 @@
 package com.bgouk.hrmsproject.bll.concretes.auth;
 
-import com.bgouk.hrmsproject.bll.abstracts.JobSeekerService;
 import com.bgouk.hrmsproject.bll.abstracts.UserService;
 import com.bgouk.hrmsproject.bll.abstracts.auth.AuthService;
 import com.bgouk.hrmsproject.bll.abstracts.auth.EmailVerificationService;
@@ -12,9 +11,7 @@ import com.bgouk.hrmsproject.core.utils.result.Result;
 import com.bgouk.hrmsproject.entities.abstracts.User;
 import com.bgouk.hrmsproject.entities.dtos.RegisterForEmployerDto;
 import com.bgouk.hrmsproject.entities.dtos.RegisterForJobSeekerDto;
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,13 +19,14 @@ import java.util.Optional;
 @Service
 public class AuthManager implements AuthService {
 
-    private final UserService<?> userService;
+
     private final JobSeekerAuthService jobSeekerAuthService;
     private final EmployerAuthService employerAuthService;
+    private final EmailVerificationService emailVerificationService;
 
     @Autowired
-    public AuthManager( UserService<?> userService, JobSeekerAuthService jobSeekerAuthService, EmployerAuthService employerAuthService) {
-        this.userService = userService;
+    public AuthManager(JobSeekerAuthService jobSeekerAuthService, EmployerAuthService employerAuthService, EmailVerificationService emailVerificationService) {
+        this.emailVerificationService = emailVerificationService;
         this.jobSeekerAuthService = jobSeekerAuthService;
         this.employerAuthService = employerAuthService;
     }
@@ -44,13 +42,8 @@ public class AuthManager implements AuthService {
     }
 
     @Override
-    public Result verify(int userId, String code) throws NoSuchFieldException, IllegalAccessException {
-        Optional<User> user = (Optional<User>) userService.getById(userId).getData();
-        if (user.isEmpty()){
-            return new ErrorResult(Messages.userNotFound);
-        }
-        EmailVerificationService authManager = (EmailVerificationService) this.getClass().getDeclaredField(user.get().getType()+"AuthService").get(this);
-        return authManager.verify(userId,code);
+    public Result verify(int userId, String code) {
+        return emailVerificationService.verify(userId,code);
 
     }
 }

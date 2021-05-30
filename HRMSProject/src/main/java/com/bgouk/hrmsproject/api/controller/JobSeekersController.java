@@ -5,11 +5,13 @@ import com.bgouk.hrmsproject.core.utils.result.DataResult;
 import com.bgouk.hrmsproject.entities.concretes.JobSeeker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.crypto.Data;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/jobseekers")
@@ -25,4 +27,10 @@ public class JobSeekersController {
     public DataResult<List<JobSeeker>> getAll(){
         return jobSeekerService.getAll();
     }
+
+    @GetMapping("/getbyemail")
+    public DataResult<Optional<JobSeeker>> getByEmail(String email){// deneme
+        return jobSeekerService.getByEmail(email);
+    }
+
 }

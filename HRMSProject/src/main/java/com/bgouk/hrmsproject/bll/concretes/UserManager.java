@@ -6,7 +6,7 @@ import com.bgouk.hrmsproject.core.utils.business.BusinessEngine;
 import com.bgouk.hrmsproject.core.utils.result.*;
 import com.bgouk.hrmsproject.dal.abstracts.UserDao;
 import com.bgouk.hrmsproject.entities.abstracts.User;
-import com.bgouk.hrmsproject.entities.concretes.SystemPersonnel;
+import com.google.common.collect.ImmutableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -29,12 +29,12 @@ public class UserManager<T extends User> implements UserService<T>{
 
     @Override
     public DataResult<List<T>> getAll() {
-        return new SuccessDataResult<List<T>>(userDao.findAll(), Messages.userListed);
+        return new SuccessDataResult<List<T>>(ImmutableList.copyOf(userDao.findAll().iterator()), Messages.userListed);
     }
 
     @Override
-    public DataResult<Optional<T>> getById(int id) {
-        return new SuccessDataResult<Optional<T>>(userDao.findById(id));
+    public DataResult<Optional<T>> getByEmail(String email) { // deneme
+        return new SuccessDataResult<Optional<T>>((Optional<T>) userDao.findByEmail(email));
     }
 
     @Override
