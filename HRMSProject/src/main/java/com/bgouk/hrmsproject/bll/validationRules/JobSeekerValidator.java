@@ -19,13 +19,13 @@ public class JobSeekerValidator extends UserValidator implements JobSeekerValida
         String nationalIdentity = jobSeeker.getNationalIdentity();
         LocalDate birth = jobSeeker.getBirthDate();
 
-        if(!super.userNullCheck(jobSeeker).isSuccess()||(firstName == null
-                ||firstName.isBlank() || (lastName == null
-                || lastName.isBlank()))||(nationalIdentity==null || nationalIdentity.isBlank())||birth == null)
+        if((firstName == null
+                ||firstName.isBlank()) || (lastName == null
+                || lastName.isBlank())||(nationalIdentity==null || nationalIdentity.isBlank())||birth == null)
         {
             return new ErrorResult(Messages.notNull);
         }
-        return new SuccessResult();
+        return super.userNullCheck(jobSeeker);
     }
 
     @Override

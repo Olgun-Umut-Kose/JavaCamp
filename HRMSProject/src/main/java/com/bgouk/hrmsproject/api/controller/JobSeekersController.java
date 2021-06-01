@@ -28,9 +28,5 @@ public class JobSeekersController {
         return jobSeekerService.getAll();
     }
 
-    @GetMapping("/getbyemail")
-    public DataResult<Optional<JobSeeker>> getByEmail(String email){// deneme
-        return jobSeekerService.getByEmail(email);
-    }
 
 }

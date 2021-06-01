@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public interface SystemPersonnelRepository extends UserDao<SystemPersonnel> {
+public interface SystemPersonnelDao extends UserDao<SystemPersonnel> {
 }

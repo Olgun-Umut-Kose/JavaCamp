@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public interface UserService<T extends User> {
 
-
-    DataResult<Optional<T>> getByEmail(String email);
     DataResult<List<T>> getAll();
     Result add(T user);
 

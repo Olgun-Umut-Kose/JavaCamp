@@ -19,8 +19,6 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "type",discriminatorType = DiscriminatorType.STRING)
 public abstract class User {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -35,7 +33,6 @@ public abstract class User {
     @JsonIgnore
     @Formula("type")
     private String type;
-
 
 
     public User(String email, String password) {

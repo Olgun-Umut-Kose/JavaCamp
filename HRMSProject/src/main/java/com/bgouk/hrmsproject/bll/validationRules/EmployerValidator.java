@@ -15,11 +15,11 @@ public class EmployerValidator extends UserValidator implements EmployerValidato
      String webAddress = employer.getWebAddress();
      String phoneNumber = employer.getPhoneNumber();
 
-     if(!super.userNullCheck(employer).isSuccess()||(companyName==null||companyName.isBlank())||(webAddress==null||webAddress.isBlank())||
+     if((companyName==null||companyName.isBlank())||(webAddress==null||webAddress.isBlank())||
                 (phoneNumber==null||phoneNumber.isBlank())){
             return new ErrorResult(Messages.notNull);
         }
-     return new SuccessResult();
+     return super.userNullCheck(employer);
      }
 
     @Override

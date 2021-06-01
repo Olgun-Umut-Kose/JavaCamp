@@ -5,7 +5,7 @@ import com.bgouk.hrmsproject.entities.concretes.JobSeeker;
 import java.util.Optional;
 
 
-public interface JobSeekerRepository extends UserDao<JobSeeker> {
+public interface JobSeekerDao extends UserDao<JobSeeker> {
 
     Optional<JobSeeker> findByNationalIdentity(String nationalIdentity);
 }

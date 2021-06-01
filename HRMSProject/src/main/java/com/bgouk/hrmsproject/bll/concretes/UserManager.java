@@ -29,12 +29,7 @@ public class UserManager<T extends User> implements UserService<T>{
 
     @Override
     public DataResult<List<T>> getAll() {
-        return new SuccessDataResult<List<T>>(ImmutableList.copyOf(userDao.findAll().iterator()), Messages.userListed);
-    }
-
-    @Override
-    public DataResult<Optional<T>> getByEmail(String email) { // deneme
-        return new SuccessDataResult<Optional<T>>((Optional<T>) userDao.findByEmail(email));
+        return new SuccessDataResult<List<T>>(userDao.findAll(), Messages.userListed);
     }
 
     @Override
@@ -51,7 +46,7 @@ public class UserManager<T extends User> implements UserService<T>{
     }
 
     private Result emailExists(String email){
-        if (userDao.findByEmail(email).isPresent()){
+        if (userDao.findByMail(email).isPresent()){
             return new ErrorResult(Messages.emailExist);
         }
         return new SuccessResult();
