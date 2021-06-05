@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class RegisterForJobSeekerDto extends AuthDto {
+public class RegisterForJobSeekerDto extends RegisterDto {
     private String nationalIdentity;
     private LocalDate birthDate;
     private String firstName;

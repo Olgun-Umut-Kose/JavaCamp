@@ -31,7 +31,7 @@ public class EmailVerificationManager implements EmailVerificationService {
         Result result = verifyControl(activationCode,code);
         if (!result.isSuccess()) return result;
         activationCode.get().setIsConfirmed(true);
-        activationCode.get().setConfirmedDate(LocalDate.now());
+        activationCode.get().setConfirmedDate(LocalDateTime.now());
         Result updateResult = activationCodeService.update(activationCode.get());
         if (!updateResult.isSuccess()) return updateResult;
         return new SuccessResult(Messages.codeConfirmed);

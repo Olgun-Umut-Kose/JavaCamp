@@ -21,7 +21,7 @@ public class Messages {
     public static String jobTitleExist = "Bu iş bölümü zaten mevcut";
     public static String jobPositionAdded = "İş bölümü eklendi";
     public static String jobPositionListed = "İş bölümleri listelendi";
-    public static String nationalIdNotValid = "İş bölümleri listelendi";
+    public static String nationalIdNotValid = "geçerli tc gir";
 
 
     //activationCode
@@ -39,5 +39,15 @@ public class Messages {
     public static String codeNotEqual= "Kod uyuşmuyor";
     public static String codeConfirmed = "Email doğrulandı";
     public static String userNotFound = "kullanıcı bulunamadı";
+    public static String jobAdvertisementAdded = "iş ilanı eklendi";
+    public static String jobAdvertisementListed = "iş ilanları listelendi";
+    public static String jobAdvertisementNotFound = "iş ilanı bulunamadı";
+    public static String jobAdvertisementActivatedToggled = "iş ilanının aktiflik durmu değiştirilmiştir şuan ki durumu: ";
+    public static String jobAdvertisementActivatedtrue = "Aktif";
+    public static String jobAdvertisementActivatedfalse = "Pasif";
+
+
+    public static String titleEquals = "bu başlık zaten var";
+
 }
 

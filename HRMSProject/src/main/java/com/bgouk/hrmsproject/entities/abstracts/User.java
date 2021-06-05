@@ -1,5 +1,6 @@
 package com.bgouk.hrmsproject.entities.abstracts;
 
+import com.bgouk.hrmsproject.entities.concretes.ActivationCode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -17,22 +21,30 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @DiscriminatorColumn(name = "type",discriminatorType = DiscriminatorType.STRING)
-public abstract class User {
+public abstract class User extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "email")
+    @Column(name = "email",nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
     private String password;
 
     @JsonIgnore
     @Formula("type")
     private String type;
+
+    @Column(name = "updated_date",nullable = true)
+    private LocalDateTime updatedDate;
+
+    @Column(name="is_deleted",nullable = false)
+    private boolean isDeleted= false;
+
+    @Column(name="is_activated",nullable = false)
+    private boolean isActivated=true;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL,targetEntity = ActivationCode.class)
+    private List<ActivationCode> activationCodes;
 
 
     public User(String email, String password) {

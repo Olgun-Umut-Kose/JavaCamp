@@ -1,11 +1,14 @@
 package com.bgouk.hrmsproject.entities.concretes;
 
+import com.bgouk.hrmsproject.entities.abstracts.AbstractEntity;
+import com.bgouk.hrmsproject.entities.abstracts.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.nio.MappedByteBuffer;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -15,15 +18,10 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActivationCode {
+public class ActivationCode extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "user_id")
-    private int userId;
+//    @Column(name = "user_id")
+//    private int userId;
 
     @Column(name = "activation_code")
     private String activationCode;
@@ -31,18 +29,20 @@ public class ActivationCode {
     @Column(name = "is_confirmed")
     private Boolean isConfirmed = false;
 
-    @Column(name = "created_date")
-    private LocalDate createdDate = LocalDate.now();
-
     @Column(name = "confirmed_date")
-    private LocalDate confirmedDate;
+    private LocalDateTime confirmedDate;
 
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate = LocalDateTime.now().plusDays(1);
 
+    @ManyToOne(targetEntity = User.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
 
-    public ActivationCode(String code, int userId) {
+
+    public ActivationCode(String code, User user) {
         this.activationCode = code;
-        this.userId = userId;
+
+        this.user = user;
     }
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class RegisterForEmployerDto extends AuthDto {
+public class RegisterForEmployerDto extends RegisterDto {
     private String companyName;
     private String webAddress;
     private String phoneNumber;

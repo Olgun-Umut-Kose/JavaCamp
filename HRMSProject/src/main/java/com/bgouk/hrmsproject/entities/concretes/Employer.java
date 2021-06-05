@@ -1,6 +1,7 @@
 package com.bgouk.hrmsproject.entities.concretes;
 
 import com.bgouk.hrmsproject.entities.abstracts.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.DiscriminatorFormula;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -28,6 +30,10 @@ public class Employer extends User {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "employer",fetch = FetchType.LAZY,targetEntity = JobAdvertisement.class)
+    private List<JobAdvertisement> jobAdvertisements;
 
     public Employer(String email, String password, String companyName, String webAddress, String phoneNumber) {
         super(email, password);

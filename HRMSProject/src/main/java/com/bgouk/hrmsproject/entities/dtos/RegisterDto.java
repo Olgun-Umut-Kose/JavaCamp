@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class AuthDto {
+public class RegisterDto {
     private String email;
     private String password;
     private String confirmPassword;

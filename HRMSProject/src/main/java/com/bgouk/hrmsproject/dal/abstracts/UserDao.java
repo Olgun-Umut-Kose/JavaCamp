@@ -13,8 +13,6 @@ import java.util.Optional;
 
 public interface UserDao<T extends User> extends JpaRepository<T,Integer>{
 
-
-
     //@Query("select j from User u, #{#entityName} j where u.email = :email ") buda çalışıyor
     @Query("from #{#entityName} e where exists (select u from User u where u.email=:email)")
     Optional<T> findByMail(String email);

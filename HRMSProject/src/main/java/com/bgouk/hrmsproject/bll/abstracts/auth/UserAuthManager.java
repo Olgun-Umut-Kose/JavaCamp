@@ -12,7 +12,7 @@ import com.bgouk.hrmsproject.core.utils.result.SuccessResult;
 import com.bgouk.hrmsproject.core.utils.verification.CodeGenerator;
 import com.bgouk.hrmsproject.entities.abstracts.User;
 import com.bgouk.hrmsproject.entities.concretes.ActivationCode;
-import com.bgouk.hrmsproject.entities.dtos.AuthDto;
+import com.bgouk.hrmsproject.entities.dtos.RegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,34 +36,37 @@ public abstract class UserAuthManager<T extends User> implements UserAuthService
     }
 
     @Override
-    public Result register(AuthDto authDto) {
-        Result result = BusinessEngine.run(authValidatorService.AuthNullCheck(authDto),authValidatorService.confirmPassword(authDto));
+    public Result register(RegisterDto registerDto) {
+        Result result = BusinessEngine.run(authValidatorService.AuthNullCheck(registerDto),authValidatorService.confirmPassword(registerDto));
         if (!result.isSuccess()){
             return result;
         }
-        T user = newUserInstance(authDto);
+        T user = newUserInstance(registerDto);
         Result userResult = userService.add(user);
         if (!userResult.isSuccess()){
             return userResult;
         }
-        String code = CodeGenerator.generateUUIDCode();
-        return emailActivation(user.getId(),code); // eğer sistem personeli email doğrulamayacak ise bu üst sınıfa taşınır
+        Result activationResult = emailActivation(user); // eğer sistem personeli email doğrulamayacak ise bu üst sınıfa taşınır
+        if (!activationResult.isSuccess()){
+            return activationResult;
+        }
+        return new SuccessResult(Messages.userAdded);
     }
 
-    public abstract T newUserInstance(AuthDto authDto);
+    public abstract T newUserInstance(RegisterDto registerDto);
 
-    public Result emailActivation(int userId, String code) {
-
-        Optional<ActivationCode> optionalActivationCode = activationCodeService.getByUserId(userId).getData();
+    public Result emailActivation(T user) {
+        String code = CodeGenerator.generateUUIDCode();
+        Optional<ActivationCode> optionalActivationCode = activationCodeService.getByUserId(user.getId()).getData();
         if (optionalActivationCode.isPresent()){
             //delete
         }
-        ActivationCode activationCode = new ActivationCode(code,userId);;
+        ActivationCode activationCode = new ActivationCode(code,user);
         Result activationResult = activationCodeService.add(activationCode);
         if(!activationResult.isSuccess()){
             return activationResult;
         }
         emailSenderService.send("aktivasyon kodunu: " + code);
-        return new SuccessResult(Messages.userAdded);
+        return new SuccessResult();
     }
 }
